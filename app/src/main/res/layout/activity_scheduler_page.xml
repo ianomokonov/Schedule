@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SchedulerPageActivity">
+    <LinearLayout android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent">
+        <LinearLayout
+            android:id="@+id/filters"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_weight="0.1"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toTopOf="parent"
+            android:background="#33CC66">
+
+            <Spinner
+                android:id="@+id/groups"
+                android:layout_width="90pt"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:dropDownWidth="match_parent"
+                android:spinnerMode="dialog"
+                android:prompt="@string/groups"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView android:id="@+id/selectedDate"
+                android:layout_width="90pt"
+                android:layout_weight="0.5"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="Выбрать дату"
+                android:textColor="#ffffff"
+                app:layout_constraintRight_toRightOf="parent"
+                android:onClick="setDate" />
+
+        </LinearLayout>
+        <ListView
+            android:id="@+id/classesList"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:layout_weight="0.8">
+        </ListView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_weight="0.1"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:background="#33CC66">
+            <Button
+                android:id="@+id/myScheduler"
+                android:layout_width="90dp"
+                android:layout_weight="0.5"
+                android:layout_height="match_parent"
+                android:layout_margin="0dp"
+                android:padding="0dp"
+                android:text="Мое расписание"
+                android:background="#3300FF"
+                android:textColor="#FFFFFF"/>
+            <Button
+                android:id="@+id/teachers"
+                android:layout_width="90dp"
+                android:layout_weight="0.5"
+                android:layout_height="match_parent"
+                android:layout_margin="0dp"
+                android:padding="0dp"
+                android:text="Преподаватели"
+                android:background="#3399FF"
+                android:textColor="#FFFFFF"/>
+        </LinearLayout>
+    </LinearLayout>
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

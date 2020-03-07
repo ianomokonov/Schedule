@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="classes">
+        <item>Математика</item>
+        <item>Физика</item>
+        <item>WEB</item>
+        <item>Питон</item>
+    </string-array>
+</resources>
