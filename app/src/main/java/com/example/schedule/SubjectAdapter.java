@@ -10,14 +10,14 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-class ClassAdapter extends ArrayAdapter<Lesson> {
+class SubjectAdapter extends ArrayAdapter<Subject> {
     private LayoutInflater inflater;
     private int layout;
-    private ArrayList<Lesson> lessons;
+    private ArrayList<Subject> lessons;
 
-    ClassAdapter(Context context, int resource, ArrayList<Lesson> lessons) {
+    SubjectAdapter(Context context, int resource, ArrayList<Subject> lessons) {
         super(context, resource, lessons);
-        this.lessons     = lessons;
+        this.lessons = lessons;
         this.layout = resource;
         this.inflater = LayoutInflater.from(context);
     }
@@ -32,11 +32,11 @@ class ClassAdapter extends ArrayAdapter<Lesson> {
         else{
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        final Lesson lesson = lessons.get(position);
+        final Subject lesson = lessons.get(position);
 
-        viewHolder.nameView.setText(lesson.getName());
-        viewHolder.dateView.setText(lesson.getDate());
-        viewHolder.nameView1.setText(lesson.getName());
+        viewHolder.nameView.setText(lesson.name);
+        viewHolder.dateView.setText(lesson.date);
+        viewHolder.nameView1.setText(lesson.name);
 
         return convertView;
     }

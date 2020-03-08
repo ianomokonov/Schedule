@@ -19,7 +19,7 @@ public class SchedulerPageActivity extends AppCompatActivity {
     String[] groupFilterValues = {"ПИ3-1", "ПИ3-2", "ПИ3-3"};
     TextView currentDateTime;
     Calendar dateAndTime=Calendar.getInstance();
-    ArrayList<Lesson> lessons = new ArrayList();
+    ArrayList<Subject> lessons = new ArrayList();
     ListView productList;
 
 
@@ -40,17 +40,17 @@ public class SchedulerPageActivity extends AppCompatActivity {
         currentDateTime=(TextView)findViewById(R.id.selectedDate);
         setInitialDateTime();
 
-        lessons.add(new Lesson("Картофель", "23.12.1998"));
-        lessons.add(new Lesson("Картофель", "23.12.1998"));
-        lessons.add(new Lesson("Картофель", "23.12.1998"));
-        lessons.add(new Lesson("Картофель", "23.12.1998"));
-        lessons.add(new Lesson("Картофель", "23.12.1998"));
-        lessons.add(new Lesson("Картофель", "23.12.1998"));
-        lessons.add(new Lesson("Картофель", "23.12.1998"));
-        lessons.add(new Lesson("Картофель", "23.12.1998"));
-        lessons.add(new Lesson("Картофель", "23.12.1998"));
+        lessons.add(new Subject("Картофель", "23.12.1998"));
+        lessons.add(new Subject("Картофель", "23.12.1998"));
+        lessons.add(new Subject("Картофель", "23.12.1998"));
+        lessons.add(new Subject("Картофель", "23.12.1998"));
+        lessons.add(new Subject("Картофель", "23.12.1998"));
+        lessons.add(new Subject("Картофель", "23.12.1998"));
+        lessons.add(new Subject("Картофель", "23.12.1998"));
+        lessons.add(new Subject("Картофель", "23.12.1998"));
+        lessons.add(new Subject("Картофель", "23.12.1998"));
         productList = (ListView) findViewById(R.id.classesList);
-        ClassAdapter classAdapter = new ClassAdapter(this, R.layout.class_list_item, lessons);
+        SubjectAdapter classAdapter = new SubjectAdapter(this, R.layout.class_list_item, lessons);
         productList.setAdapter(classAdapter);
     }
 
