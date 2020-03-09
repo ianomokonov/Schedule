@@ -5,19 +5,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.TextView;
+
+import com.example.schedule.models.Subject;
 
 import java.util.ArrayList;
 
 class SubjectAdapter extends ArrayAdapter<Subject> {
     private LayoutInflater inflater;
     private int layout;
-    private ArrayList<Subject> lessons;
+    private ArrayList<Subject> objects;
 
-    SubjectAdapter(Context context, int resource, ArrayList<Subject> lessons) {
-        super(context, resource, lessons);
-        this.lessons = lessons;
+    SubjectAdapter(Context context, int resource, ArrayList<Subject> objects) {
+        super(context, resource, objects);
+        this.objects = objects;
         this.layout = resource;
         this.inflater = LayoutInflater.from(context);
     }
@@ -32,21 +33,26 @@ class SubjectAdapter extends ArrayAdapter<Subject> {
         else{
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        final Subject lesson = lessons.get(position);
+        final Subject subject = objects.get(position);
 
-        viewHolder.nameView.setText(lesson.name);
-        viewHolder.dateView.setText(lesson.date);
-        viewHolder.nameView1.setText(lesson.name);
+        viewHolder.nameView.setText(subject.name);
+        viewHolder.timeFromView.setText(subject.timeFrom);
+        viewHolder.timeToView.setText(subject.timeTo);
+        viewHolder.roomView.setText(subject.room);
+        viewHolder.addressView.setText(subject.address);
+        viewHolder.lecturerView.setText(subject.lecturer);
 
         return convertView;
     }
     private class ViewHolder {
-        final TextView nameView, dateView, nameView1, dateView1;
+        final TextView nameView, timeFromView, timeToView, roomView, addressView, lecturerView ;
         ViewHolder(View view){
-            nameView = (TextView) view.findViewById(R.id.class_list_item_name);
-            dateView = (TextView) view.findViewById(R.id.class_list_item_date);
-            nameView1 = (TextView) view.findViewById(R.id.class_list_item_name1);
-            dateView1 = (TextView) view.findViewById(R.id.class_list_item_date1);
+            nameView = (TextView) view.findViewById(R.id.subject_list_item_name);
+            timeFromView = (TextView) view.findViewById(R.id.subject_list_item_time_from);
+            timeToView = (TextView) view.findViewById(R.id.subject_list_item_time_to);
+            roomView = (TextView) view.findViewById(R.id.subject_list_item_room);
+            addressView = (TextView) view.findViewById(R.id.subject_list_item_address);
+            lecturerView = (TextView) view.findViewById(R.id.subject_list_item_lecturer);
         }
     }
 }
