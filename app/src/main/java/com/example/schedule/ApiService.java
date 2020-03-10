@@ -27,7 +27,7 @@ public class ApiService {
             while ((line = rd.readLine()) != null) {
                 result += line.replaceAll("\\<.*?>",""); //сохранение ответа и удаление тегов
             }
-            rd.close(); // закрытие чтения из потока
+            rd.close(); // закрытие чтения
             return result;
 
         } catch (Exception e) {
