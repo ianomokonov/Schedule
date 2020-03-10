@@ -1,6 +1,8 @@
 package com.example.schedule;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.format.DateUtils;
 import android.view.View;
@@ -12,9 +14,13 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.schedule.models.GroupListItem;
 import com.example.schedule.models.Subject;
+import com.example.schedule.models.SubjectDTO;
 import com.example.schedule.models.SubjectType;
+import com.google.gson.Gson;
 
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -24,13 +30,14 @@ public class SchedulerPageActivity extends AppCompatActivity {
     Calendar dateAndTime=Calendar.getInstance();
     ArrayList<Subject> subjects = new ArrayList();
     ListView productList;
+    Gson gson = new Gson();
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scheduler_page);
-        this.initSubjectsList();
+        this.initSubjectsList(this);
         // адаптер
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, groupFilterValues);
         adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
@@ -44,9 +51,8 @@ public class SchedulerPageActivity extends AppCompatActivity {
         setInitialDateTime();
 
 
-        productList = (ListView) findViewById(R.id.classesList);
-        SubjectAdapter classAdapter = new SubjectAdapter(this, R.layout.subject_list_item, subjects);
-        productList.setAdapter(classAdapter);
+
+
     }
 
     // отображаем диалоговое окно для выбора даты
@@ -66,17 +72,24 @@ public class SchedulerPageActivity extends AppCompatActivity {
                 DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_YEAR));
     }
 
-    private void initSubjectsList(){
-        subjects.add(new Subject("Разработка мобильных приложений", "23.12.1998", "10:10", "11:40", "415", "Щербаковская, 38", "Д. Милованов", SubjectType.seminar));
-        subjects.add(new Subject("Технологии анализа данных и машинное обучение", "23.12.1998", "10:10", "11:40", "415", "Щербаковская, 38", "Д. Милованов", SubjectType.seminar));
-        subjects.add(new Subject("Разработка WEB приложений", "23.12.1998", "10:10", "11:40", "415", "Щербаковская, 38", "Д. Милованов", SubjectType.seminar));
-        subjects.add(new Subject("Сетевые модели", "23.12.1998", "10:10", "11:40", "415", "Щербаковская, 38", "Д. Милованов", SubjectType.seminar));
-        subjects.add(new Subject("Математичские методы принятия решений", "23.12.1998", "10:10", "11:40","415", "Щербаковская, 38", "Д. Милованов", SubjectType.seminar));
-        subjects.add(new Subject("Разработка мобильных приложений", "23.12.1998", "10:10", "11:40", "415", "Щербаковская, 38", "Д. Милованов", SubjectType.lecture));
-        subjects.add(new Subject("Технологии анализа данных и машинное обучение", "23.12.1998", "10:10", "11:40", "415", "Щербаковская, 38", "Д. Милованов", SubjectType.lecture));
-        subjects.add(new Subject("Разработка WEB приложений", "23.12.1998", "10:10", "11:40", "415", "Щербаковская, 38", "Д. Милованов", SubjectType.consultation));
-        subjects.add(new Subject("Сетевые модели", "23.12.1998", "10:10", "11:40", "415", "Щербаковская, 38", "Д. Милованов", SubjectType.exam));
-        subjects.add(new Subject("Математичские методы принятия решений", "23.12.1998", "10:10", "11:40", "415", "Щербаковская, 38", "Д. Милованов", SubjectType.seminar));
+    private void initSubjectsList(Context context){
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                try{
+                    GroupListItem[] groups = gson.fromJson(ApiService.get("https://ruz.fa.ru/api/search?term="+ URLEncoder.encode("ПИ3-2", "UTF-8")+"&type=group"), GroupListItem[].class);
+                    SubjectDTO[] subjectsDTO = gson.fromJson(ApiService.get("https://ruz.fa.ru/api/schedule/group/8892?start=2020.03.09&finish=2020.03.15&lng=1"), SubjectDTO[].class);
+                    for(SubjectDTO subject:subjectsDTO){
+                        subjects.add(new Subject(subject.discipline, subject.date, subject.beginLesson, subject.endLesson, subject.auditorium, subject.building, subject.lecturer, SubjectType.seminar));
+                    }
+                    productList = (ListView) findViewById(R.id.classesList);
+                    SubjectAdapter classAdapter = new SubjectAdapter(null, R.layout.subject_list_item, subjects);
+                    productList.setAdapter(classAdapter);
+                } catch(Exception e){
+
+                }
+            }
+        });
     }
 
     // установка обработчика выбора даты
