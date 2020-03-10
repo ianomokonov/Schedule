@@ -68,8 +68,7 @@ public class SchedulerPageActivity extends AppCompatActivity {
     private void setInitialDateTime() {
 
         currentDateTime.setText(DateUtils.formatDateTime(this,
-                dateAndTime.getTimeInMillis(),
-                DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_YEAR));
+                dateAndTime.getTimeInMillis(),DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_YEAR));
     }
 
     private void initSubjectsList(Context context){
