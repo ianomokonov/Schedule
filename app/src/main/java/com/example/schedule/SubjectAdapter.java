@@ -11,12 +11,12 @@ import com.example.schedule.models.Subject;
 
 import java.util.ArrayList;
 
-class SubjectAdapter extends ArrayAdapter<Subject> {
+public class SubjectAdapter extends ArrayAdapter<Subject> {
     private LayoutInflater inflater;
     private int layout;
     private ArrayList<Subject> objects;
 
-    SubjectAdapter(Context context, int resource, ArrayList<Subject> objects) {
+    public SubjectAdapter(Context context, int resource, ArrayList<Subject> objects) {
         super(context, resource, objects);
         this.objects = objects;
         this.layout = resource;

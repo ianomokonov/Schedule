@@ -18,6 +18,7 @@ import com.example.schedule.models.GroupListItem;
 import com.example.schedule.models.Subject;
 import com.example.schedule.models.SubjectDTO;
 import com.example.schedule.models.SubjectType;
+import com.example.schedule.requests.GetSubjectsRequest;
 import com.google.gson.Gson;
 
 import java.net.URLEncoder;
@@ -37,7 +38,7 @@ public class SchedulerPageActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scheduler_page);
-        this.initSubjectsList(this);
+        this.initSubjectsList();
         // адаптер
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, groupFilterValues);
         adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
@@ -71,24 +72,9 @@ public class SchedulerPageActivity extends AppCompatActivity {
                 dateAndTime.getTimeInMillis(),DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_YEAR));
     }
 
-    private void initSubjectsList(Context context){
-        AsyncTask.execute(new Runnable() {
-            @Override
-            public void run() {
-                try{
-                    GroupListItem[] groups = gson.fromJson(ApiService.get("https://ruz.fa.ru/api/search?term="+ URLEncoder.encode("ПИ3-2", "UTF-8")+"&type=group"), GroupListItem[].class);
-                    SubjectDTO[] subjectsDTO = gson.fromJson(ApiService.get("https://ruz.fa.ru/api/schedule/group/8892?start=2020.03.09&finish=2020.03.15&lng=1"), SubjectDTO[].class);
-                    for(SubjectDTO subject:subjectsDTO){
-                        subjects.add(new Subject(subject.discipline, subject.date, subject.beginLesson, subject.endLesson, subject.auditorium, subject.building, subject.lecturer, SubjectType.seminar));
-                    }
-                    productList = (ListView) findViewById(R.id.classesList);
-                    SubjectAdapter classAdapter = new SubjectAdapter(null, R.layout.subject_list_item, subjects);
-                    productList.setAdapter(classAdapter);
-                } catch(Exception e){
-
-                }
-            }
-        });
+    private void initSubjectsList(){
+        GetSubjectsRequest request = new GetSubjectsRequest((ListView) findViewById(R.id.classesList), this);
+        request.execute();
     }
 
     // установка обработчика выбора даты
