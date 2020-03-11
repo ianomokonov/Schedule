@@ -1,28 +1,19 @@
 package com.example.schedule;
 
 import android.app.DatePickerDialog;
-import android.content.Context;
-import android.os.AsyncTask;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.format.DateUtils;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.ListView;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.schedule.models.GroupListItem;
-import com.example.schedule.models.Subject;
-import com.example.schedule.models.SubjectDTO;
-import com.example.schedule.models.SubjectType;
 import com.example.schedule.requests.GetSubjectsRequest;
 import com.google.gson.Gson;
 
-import java.net.URLEncoder;
-import java.util.ArrayList;
 import java.util.Calendar;
 
 public class SchedulerPageActivity extends AppCompatActivity {
@@ -38,13 +29,13 @@ public class SchedulerPageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_scheduler_page);
         this.initSubjectsList();
         // адаптер
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, groupFilterValues);
-        adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+//        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, groupFilterValues);
+//        adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
 
-        Spinner spinner = (Spinner) findViewById(R.id.groups);
-        spinner.setAdapter(adapter);
+//        Spinner spinner = (Spinner) findViewById(R.id.groups);
+//        spinner.setAdapter(adapter);
         // заголовок
-        spinner.setPrompt("Группы");
+//        spinner.setPrompt("Группы");
 
         currentDateTime=(TextView)findViewById(R.id.selectedDate);
         setInitialDateTime();
@@ -73,6 +64,11 @@ public class SchedulerPageActivity extends AppCompatActivity {
     private void initSubjectsList(){
         GetSubjectsRequest request = new GetSubjectsRequest((ListView) findViewById(R.id.classesList), this);
         request.execute();
+    }
+
+    public void onGroupClick(View v) {
+        Intent intent = new Intent(this, SearchGroupActivity.class );
+        startActivity(intent);
     }
 
     // установка обработчика выбора даты

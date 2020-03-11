@@ -12,22 +12,22 @@
         <LinearLayout
             android:id="@+id/filters"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="20dp"
             android:layout_weight="0.1"
             android:orientation="horizontal"
             app:layout_constraintTop_toTopOf="parent"
             android:background="#33CC66">
 
-            <Spinner
+            <TextView
                 android:id="@+id/groups"
                 android:layout_width="90pt"
                 android:layout_height="match_parent"
                 android:layout_weight="0.5"
-                android:dropDownWidth="match_parent"
-                android:spinnerMode="dialog"
-                android:prompt="@string/groups"
+                android:textColor="#ffffff"
+                android:gravity="center"
+                android:text="@string/groups"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:onClick="onGroupClick"/>
 
             <TextView android:id="@+id/selectedDate"
                 android:layout_width="90pt"
