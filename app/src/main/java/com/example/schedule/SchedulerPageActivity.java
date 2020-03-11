@@ -29,8 +29,6 @@ public class SchedulerPageActivity extends AppCompatActivity {
     String[] groupFilterValues = {"ПИ3-1", "ПИ3-2", "ПИ3-3"};
     TextView currentDateTime;
     Calendar dateAndTime=Calendar.getInstance();
-    ArrayList<Subject> subjects = new ArrayList();
-    ListView productList;
     Gson gson = new Gson();
 
 

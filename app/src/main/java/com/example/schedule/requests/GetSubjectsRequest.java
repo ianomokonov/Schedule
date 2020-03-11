@@ -6,16 +6,12 @@ import android.widget.ListView;
 
 import com.example.schedule.ApiService;
 import com.example.schedule.R;
-import com.example.schedule.SchedulerPageActivity;
 import com.example.schedule.SubjectAdapter;
-import com.example.schedule.models.GroupListItem;
 import com.example.schedule.models.Subject;
 import com.example.schedule.models.SubjectDTO;
 import com.example.schedule.models.SubjectType;
-import com.example.schedule.models.TermWithListView;
 import com.google.gson.Gson;
 
-import java.net.URLEncoder;
 import java.util.ArrayList;
 
 public class GetSubjectsRequest extends AsyncTask<String, Void, ArrayList<Subject>> {
