@@ -7,14 +7,27 @@
     tools:context=".MainActivity">
 
     <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
+        android:id="@+id/student"
+        android:layout_width="150dp"
+        android:layout_marginBottom="50dp"
         android:layout_height="wrap_content"
-        android:text="Перейти на следующую страницу"
+        android:text="Студент"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:onClick="onClick"/>
+
+    <Button
+        android:id="@+id/professor"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="Преподаватель"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="60dp"
         android:onClick="onClick"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
