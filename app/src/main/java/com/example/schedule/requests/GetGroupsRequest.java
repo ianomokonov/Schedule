@@ -16,17 +16,19 @@ import java.util.ArrayList;
 
 public class GetGroupsRequest extends AsyncTask<String, Void, ArrayList<GroupListItem>> {
     Gson gson = new Gson();
-    ListView listView;
     Context context;
-    public GetGroupsRequest(ListView listView, Context context){
-        this.listView = listView;
+    SearchGroupAdapter searchGroupAdapter;
+    ArrayList<GroupListItem> groups;
+    public GetGroupsRequest(SearchGroupAdapter searchGroupAdapter, Context context, ArrayList<GroupListItem> groups){
+        this.searchGroupAdapter = searchGroupAdapter;
         this.context = context;
+        this.groups = groups;
     }
 
     protected ArrayList<GroupListItem> doInBackground(String... terms){
         ArrayList<GroupListItem> groups = new ArrayList<>();
         try{
-            GroupListItem[] groupsList = gson.fromJson(ApiService.get("https://ruz.fa.ru/api/search?term="+ URLEncoder.encode("П", "UTF-8")+"&type=group"), GroupListItem[].class);
+            GroupListItem[] groupsList = gson.fromJson(ApiService.get("https://ruz.fa.ru/api/search?term="+ URLEncoder.encode(terms[0], "UTF-8")+"&type=group"), GroupListItem[].class);
             for(GroupListItem group:groupsList){
                 groups.add(group);
             }
@@ -38,9 +40,13 @@ public class GetGroupsRequest extends AsyncTask<String, Void, ArrayList<GroupLis
 
     @Override
     protected void onPostExecute(ArrayList<GroupListItem> groups) {
-        SearchGroupAdapter classAdapter = new SearchGroupAdapter(context, R.layout.list_item, groups);
-        listView.setAdapter(classAdapter);
-        // устанавливаем размеры
+        if (this.groups.size() > 0){
+            this.groups.clear();
+        }
+
+        this.groups.addAll(groups);
+        searchGroupAdapter.notifyDataSetChanged();
+//        устанавливаем размеры
 //        listView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.FILL_PARENT));
     }
 }

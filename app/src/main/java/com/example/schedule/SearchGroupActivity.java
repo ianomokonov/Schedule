@@ -13,12 +13,17 @@ import android.widget.TextView;
 import androidx.annotation.IntDef;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.schedule.models.GroupListItem;
 import com.example.schedule.requests.GetGroupsRequest;
+
+import java.util.ArrayList;
 
 public class SearchGroupActivity extends AppCompatActivity {
     ListView groupListView;
     Context context;
     GetGroupsRequest request;
+    ArrayList<GroupListItem> groups;
+    SearchGroupAdapter searchGroupAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,7 +41,7 @@ public class SearchGroupActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                request = new GetGroupsRequest(groupListView, context);
+                request = new GetGroupsRequest(searchGroupAdapter, context, groups);
                 request.execute(s.toString());
             }
 
@@ -48,7 +53,10 @@ public class SearchGroupActivity extends AppCompatActivity {
     }
 
     private  void initGroupList(){
-        request = new GetGroupsRequest(groupListView, this);
+        this.groups = new ArrayList<GroupListItem>();
+        searchGroupAdapter = new SearchGroupAdapter(context, R.layout.list_item, this.groups);
+        groupListView.setAdapter(searchGroupAdapter);
+        request = new GetGroupsRequest(searchGroupAdapter, this, groups);
         request.execute("");
     }
 }
