@@ -11,31 +11,41 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.schedule.models.GroupListItem;
+import com.example.schedule.models.Subject;
 import com.example.schedule.requests.GetSubjectsRequest;
 import com.google.gson.Gson;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 public class SchedulerPageActivity extends AppCompatActivity {
     String[] groupFilterValues = {"ПИ3-1", "ПИ3-2", "ПИ3-3"};
     TextView currentDateTime;
+    TextView groupView;
     Calendar dateAndTime=Calendar.getInstance();
     Gson gson = new Gson();
+    ArrayList<Subject> subjects;
+    GetSubjectsRequest request;
+    SubjectAdapter subjectAdapter;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scheduler_page);
+        groupView = (TextView) findViewById(R.id.groups);
+        Bundle arguments = getIntent().getExtras();
         this.initSubjectsList();
-        // адаптер
-//        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, groupFilterValues);
-//        adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+        if(arguments != null && arguments.containsKey("group")){
+            GroupListItem group = gson.fromJson(arguments.get("group").toString(), GroupListItem.class);
+            groupView.setText(group.label);
+            refreshList(Integer.toString(group.id));
+        } else {
+            refreshList("8892");
+        }
 
-//        Spinner spinner = (Spinner) findViewById(R.id.groups);
-//        spinner.setAdapter(adapter);
-        // заголовок
-//        spinner.setPrompt("Группы");
+
 
         currentDateTime=(TextView)findViewById(R.id.selectedDate);
         setInitialDateTime();
@@ -62,8 +72,17 @@ public class SchedulerPageActivity extends AppCompatActivity {
     }
 
     private void initSubjectsList(){
-        GetSubjectsRequest request = new GetSubjectsRequest((ListView) findViewById(R.id.classesList), this);
-        request.execute();
+        subjects = new ArrayList<Subject>();
+        subjectAdapter = new SubjectAdapter(this, R.layout.subject_list_item, subjects);
+        ListView subjectsView = (ListView) findViewById(R.id.classesList);
+        subjectsView.setAdapter(subjectAdapter);
+
+
+    }
+
+    private void refreshList(String group){
+        request = new GetSubjectsRequest(subjectAdapter, this, subjects);
+        request.execute(group);
     }
 
     public void onGroupClick(View v) {
