@@ -18,11 +18,17 @@ import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 public class SchedulerPageActivity extends AppCompatActivity {
     String[] groupFilterValues = {"ПИ3-1", "ПИ3-2", "ПИ3-3"};
-    TextView currentDateTime;
+    TextView currentDateTimeView;
     TextView groupView;
+    GroupListItem currentGroup;
+    String currentDate;
     Calendar dateAndTime=Calendar.getInstance();
     Gson gson = new Gson();
     ArrayList<Subject> subjects;
@@ -35,20 +41,26 @@ public class SchedulerPageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scheduler_page);
         groupView = (TextView) findViewById(R.id.groups);
+        currentDateTimeView=(TextView)findViewById(R.id.selectedDate);
         Bundle arguments = getIntent().getExtras();
-        this.initSubjectsList();
+
+        initSubjectsList();
+        setInitialDateTime();
+
         if(arguments != null && arguments.containsKey("group")){
             GroupListItem group = gson.fromJson(arguments.get("group").toString(), GroupListItem.class);
-            groupView.setText(group.label);
-            refreshList(Integer.toString(group.id));
+            currentGroup = group;
         } else {
-            refreshList("8892");
+            currentGroup = new GroupListItem();
+            currentGroup.id = 8892;
+            currentGroup.label = "ПИ3-2";
         }
+        refreshList();
+        groupView.setText(currentGroup.label);
 
 
 
-        currentDateTime=(TextView)findViewById(R.id.selectedDate);
-        setInitialDateTime();
+
 
 
 
@@ -66,9 +78,12 @@ public class SchedulerPageActivity extends AppCompatActivity {
 
     // установка начальных даты и времени
     private void setInitialDateTime() {
-
-        currentDateTime.setText(DateUtils.formatDateTime(this,
-                dateAndTime.getTimeInMillis(),DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_YEAR));
+                // Текущее время
+        Date currentDate = new Date(dateAndTime.getTimeInMillis());
+        // Форматирование времени как "день.месяц.год"
+        DateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd", Locale.getDefault());
+        this.currentDate = dateFormat.format(currentDate);
+        currentDateTimeView.setText(this.currentDate);
     }
 
     private void initSubjectsList(){
@@ -80,9 +95,11 @@ public class SchedulerPageActivity extends AppCompatActivity {
 
     }
 
-    private void refreshList(String group){
-        request = new GetSubjectsRequest(subjectAdapter, this, subjects);
-        request.execute(group);
+    private void refreshList(){
+        if(currentGroup != null && currentDate != null){
+            request = new GetSubjectsRequest(subjectAdapter, this, subjects);
+            request.execute(Integer.toString(currentGroup.id), currentDate);
+        }
     }
 
     public void onGroupClick(View v) {
@@ -97,6 +114,8 @@ public class SchedulerPageActivity extends AppCompatActivity {
             dateAndTime.set(Calendar.MONTH, monthOfYear);
             dateAndTime.set(Calendar.DAY_OF_MONTH, dayOfMonth);
             setInitialDateTime();
+            String d = currentDate;
+            refreshList();
         }
     };
 }

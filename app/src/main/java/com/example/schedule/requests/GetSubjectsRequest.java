@@ -27,7 +27,7 @@ public class GetSubjectsRequest extends AsyncTask<String, Void, ArrayList<Subjec
     protected ArrayList<Subject> doInBackground(String... term){
         ArrayList<Subject> subjects = new ArrayList<Subject>();
         try{
-            SubjectDTO[] subjectsDTO = gson.fromJson(ApiService.get("https://ruz.fa.ru/api/schedule/group/"+term[0]+"?start=2020.03.09&finish=2020.03.15&lng=1"), SubjectDTO[].class);
+            SubjectDTO[] subjectsDTO = gson.fromJson(ApiService.get("https://ruz.fa.ru/api/schedule/group/"+term[0]+"?start="+term[1]+"&finish="+term[1]+"&lng=1"), SubjectDTO[].class);
             for(SubjectDTO subject:subjectsDTO){
                 subjects.add(new Subject(subject.discipline, subject.date, subject.beginLesson, subject.endLesson, subject.auditorium, subject.building, subject.lecturer, SubjectType.seminar));
             }
