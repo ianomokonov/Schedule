@@ -18,7 +18,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".SchedulerPageActivity"></activity>
-        <activity android:name=".SearchGroupActivity"></activity>
+        <activity android:name=".SearchActivity"></activity>
     </application>
 
 </manifest>

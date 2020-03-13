@@ -7,21 +7,20 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import com.example.schedule.models.GroupListItem;
-import com.example.schedule.models.Subject;
+import com.example.schedule.models.SearchListItem;
 
 import java.util.ArrayList;
 
-public class SearchGroupAdapter extends ArrayAdapter<GroupListItem> {
+public class SearchAdapter extends ArrayAdapter<SearchListItem> {
     private LayoutInflater inflater;
     private int layout;
-    private ArrayList<GroupListItem> groups;
+    private ArrayList<SearchListItem> items;
 //    private OnGroupClickListener onGroupClickListener;
 
 
-    public SearchGroupAdapter(Context context, int resource, ArrayList<GroupListItem> groups) {
+    public SearchAdapter(Context context, int resource, ArrayList<SearchListItem> groups) {
         super(context, resource, groups);
-        this.groups = groups;
+        this.items = groups;
         this.layout = resource;
         this.inflater = LayoutInflater.from(context);
 //        this.onGroupClickListener = onGroupClickListener;
@@ -37,7 +36,7 @@ public class SearchGroupAdapter extends ArrayAdapter<GroupListItem> {
         else{
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        final GroupListItem group = groups.get(position);
+        final SearchListItem group = items.get(position);
 
         viewHolder.nameView.setText(group.label);
         viewHolder.descriptionView.setText(group.description);
@@ -49,13 +48,6 @@ public class SearchGroupAdapter extends ArrayAdapter<GroupListItem> {
         ViewHolder(View view){
             nameView = (TextView) view.findViewById(R.id.name);
             descriptionView = (TextView) view.findViewById(R.id.description);
-//            view.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    GroupListItem group = groups.get(getLayoutPosition());
-//                    onGroupClickListener.onGroupClick(group);
-//                }
-//            });
         }
     }
 }

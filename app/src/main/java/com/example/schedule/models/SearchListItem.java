@@ -1,7 +1,7 @@
 package com.example.schedule.models;
 
-public class GroupListItem {
-    public int id;
+public class SearchListItem {
+    public String id;
     public String label;
     public String description;
 }

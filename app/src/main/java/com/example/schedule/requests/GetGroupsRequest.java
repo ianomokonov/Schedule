@@ -2,34 +2,33 @@ package com.example.schedule.requests;
 
 import android.content.Context;
 import android.os.AsyncTask;
-import android.view.ViewGroup;
-import android.widget.ListView;
 
 import com.example.schedule.ApiService;
-import com.example.schedule.R;
-import com.example.schedule.SearchGroupAdapter;
-import com.example.schedule.models.GroupListItem;
+import com.example.schedule.SearchAdapter;
+import com.example.schedule.models.SearchListItem;
 import com.google.gson.Gson;
 
 import java.net.URLEncoder;
 import java.util.ArrayList;
 
-public class GetGroupsRequest extends AsyncTask<String, Void, ArrayList<GroupListItem>> {
+public class GetGroupsRequest extends AsyncTask<String, Void, ArrayList<SearchListItem>> {
     Gson gson = new Gson();
     Context context;
-    SearchGroupAdapter searchGroupAdapter;
-    ArrayList<GroupListItem> groups;
-    public GetGroupsRequest(SearchGroupAdapter searchGroupAdapter, Context context, ArrayList<GroupListItem> groups){
-        this.searchGroupAdapter = searchGroupAdapter;
+    SearchAdapter searchAdapter;
+    ArrayList<SearchListItem> groups;
+    String type;
+    public GetGroupsRequest(SearchAdapter searchAdapter, Context context, ArrayList<SearchListItem> groups, String type){
+        this.searchAdapter = searchAdapter;
         this.context = context;
         this.groups = groups;
+        this.type = type;
     }
 
-    protected ArrayList<GroupListItem> doInBackground(String... terms){
-        ArrayList<GroupListItem> groups = new ArrayList<>();
+    protected ArrayList<SearchListItem> doInBackground(String... terms){
+        ArrayList<SearchListItem> groups = new ArrayList<>();
         try{
-            GroupListItem[] groupsList = gson.fromJson(ApiService.get("https://ruz.fa.ru/api/search?term="+ URLEncoder.encode(terms[0], "UTF-8")+"&type=group"), GroupListItem[].class);
-            for(GroupListItem group:groupsList){
+            SearchListItem[] groupsList = gson.fromJson(ApiService.get("https://ruz.fa.ru/api/search?term="+ URLEncoder.encode(terms[0], "UTF-8")+"&type="+type), SearchListItem[].class);
+            for(SearchListItem group:groupsList){
                 groups.add(group);
             }
         } catch (Exception e) {
@@ -39,13 +38,13 @@ public class GetGroupsRequest extends AsyncTask<String, Void, ArrayList<GroupLis
     }
 
     @Override
-    protected void onPostExecute(ArrayList<GroupListItem> groups) {
+    protected void onPostExecute(ArrayList<SearchListItem> groups) {
         if (this.groups.size() > 0){
             this.groups.clear();
         }
 
         this.groups.addAll(groups);
-        searchGroupAdapter.notifyDataSetChanged();
+        searchAdapter.notifyDataSetChanged();
 //        устанавливаем размеры
 //        listView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.FILL_PARENT));
     }
