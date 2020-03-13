@@ -11,23 +11,6 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         app:layout_constraintTop_toTopOf="parent">
-<!--        <LinearLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:orientation="horizontal"-->
-<!--            android:gravity="right"-->
-<!--            >-->
-<!--            <ImageButton-->
-<!--                android:id="@+id/subject_expand"-->
-<!--                android:layout_width="100px"-->
-<!--                android:layout_height="100px"-->
-<!--                android:padding="5dp"-->
-<!--                android:src="@drawable/expand_solid"-->
-<!--                android:scaleType="fitXY"-->
-<!--                android:background="#ffffff"-->
-<!--                android:onClick="onExpandClick"/>-->
-
-<!--        </LinearLayout>-->
         <LinearLayout
             android:id="@+id/filters"
             android:layout_width="match_parent"
@@ -35,6 +18,8 @@
             android:layout_weight="0.1"
             android:orientation="horizontal"
             app:layout_constraintTop_toTopOf="parent"
+            android:paddingHorizontal="15dp"
+            android:paddingTop="15dp"
             android:background="#33CC66">
 
             <TextView
@@ -43,7 +28,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="0.5"
                 android:textColor="#ffffff"
-                android:gravity="center"
+                android:gravity="left"
                 android:text="@string/groups"
                 app:layout_constraintLeft_toLeftOf="parent"
                 android:onClick="onGroupClick"/>
@@ -52,7 +37,8 @@
                 android:layout_width="90pt"
                 android:layout_weight="0.5"
                 android:layout_height="match_parent"
-                android:gravity="center"
+                android:gravity="right"
+
                 android:text="Выбрать дату"
                 android:textColor="#ffffff"
                 app:layout_constraintRight_toRightOf="parent"
@@ -90,6 +76,7 @@
                 android:padding="0dp"
                 android:text="Мое расписание"
                 android:background="#3300FF"
+                android:textSize="12sp"
                 android:textColor="#FFFFFF"/>
             <Button
                 android:id="@+id/teachers"
@@ -99,6 +86,7 @@
                 android:layout_margin="0dp"
                 android:padding="0dp"
                 android:text="Преподаватели"
+                android:textSize="12sp"
                 android:background="#3399FF"
                 android:textColor="#FFFFFF"/>
             <ImageButton

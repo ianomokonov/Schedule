@@ -50,6 +50,7 @@ public class SchedulerPageActivity extends AppCompatActivity implements Datable 
         groupView = (TextView) findViewById(R.id.groups);
         noDataView = (TextView) findViewById(R.id.subject_no_data);
         subjectsView = (ListView) findViewById(R.id.classesList);
+        subjectsView.setNestedScrollingEnabled(true);
         currentDateTimeView=(TextView)findViewById(R.id.selectedDate);
         groupView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
