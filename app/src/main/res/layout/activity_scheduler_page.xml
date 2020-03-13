@@ -11,27 +11,27 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         app:layout_constraintTop_toTopOf="parent">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="right"
-            >
-            <ImageButton
-                android:id="@+id/subject_expand"
-                android:layout_width="100px"
-                android:layout_height="100px"
-                android:padding="5dp"
-                android:src="@drawable/expand_solid"
-                android:scaleType="fitXY"
-                android:background="#ffffff"
-                android:onClick="onExpandClick"/>
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="horizontal"-->
+<!--            android:gravity="right"-->
+<!--            >-->
+<!--            <ImageButton-->
+<!--                android:id="@+id/subject_expand"-->
+<!--                android:layout_width="100px"-->
+<!--                android:layout_height="100px"-->
+<!--                android:padding="5dp"-->
+<!--                android:src="@drawable/expand_solid"-->
+<!--                android:scaleType="fitXY"-->
+<!--                android:background="#ffffff"-->
+<!--                android:onClick="onExpandClick"/>-->
 
-        </LinearLayout>
+<!--        </LinearLayout>-->
         <LinearLayout
             android:id="@+id/filters"
             android:layout_width="match_parent"
-            android:layout_height="20dp"
+            android:layout_height="50dp"
             android:layout_weight="0.1"
             android:orientation="horizontal"
             app:layout_constraintTop_toTopOf="parent"
@@ -101,7 +101,17 @@
                 android:text="Преподаватели"
                 android:background="#3399FF"
                 android:textColor="#FFFFFF"/>
+            <ImageButton
+                android:id="@+id/subject_expand"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:padding="10dp"
+                android:src="@drawable/expand_solid_white"
+                android:scaleType="fitXY"
+                android:background="#3399FF"
+                android:onClick="onExpandClick"/>
         </LinearLayout>
+
     </LinearLayout>
 
 

@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.schedule.models.Datable;
 import com.example.schedule.models.GroupLecturer;
 import com.example.schedule.models.SearchListItem;
 import com.example.schedule.models.Subject;
@@ -26,7 +27,7 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.concurrent.ExecutionException;
 
-public class SchedulerPageActivity extends AppCompatActivity {
+public class SchedulerPageActivity extends AppCompatActivity implements Datable {
     TextView currentDateTimeView;
     TextView groupView;
     SearchListItem currentGroup;
@@ -50,6 +51,14 @@ public class SchedulerPageActivity extends AppCompatActivity {
         noDataView = (TextView) findViewById(R.id.subject_no_data);
         subjectsView = (ListView) findViewById(R.id.classesList);
         currentDateTimeView=(TextView)findViewById(R.id.selectedDate);
+        groupView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                SaveFavoriteGroupDialog dialog = new SaveFavoriteGroupDialog();
+                dialog.show(getSupportFragmentManager(), "custom");
+                return  true;
+            }
+        });
         OnSwipeTouchListener swipeListener = new OnSwipeTouchListener(this) {
 
             public void onSwipeLeft() {
@@ -111,9 +120,9 @@ public class SchedulerPageActivity extends AppCompatActivity {
     public  void onExpandClick(View v){
         ImageButton button = (ImageButton) findViewById(R.id.subject_expand);
         if(expanded){
-            button.setImageResource(R.drawable.expand_solid);
+            button.setImageResource(R.drawable.expand_solid_white);
         } else {
-            button.setImageResource(R.drawable.compress_solid);
+            button.setImageResource(R.drawable.compress_solid_white);
         }
         expanded = !expanded;
         refreshList();
@@ -202,4 +211,10 @@ public class SchedulerPageActivity extends AppCompatActivity {
             refreshList();
         }
     };
+
+    @Override
+    public void saveFavoriteGroup(boolean save) {
+        //TODO сохранение группы в избранное
+        int i = 0;
+    }
 }
