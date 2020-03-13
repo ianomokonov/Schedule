@@ -1,11 +1,18 @@
 package com.example.schedule;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.annotation.ColorInt;
+import androidx.annotation.ColorLong;
+import androidx.annotation.ColorRes;
 
 import com.example.schedule.models.Subject;
 
@@ -42,10 +49,19 @@ public class SubjectAdapter extends ArrayAdapter<Subject> {
         viewHolder.addressView.setText(subject.address);
         viewHolder.lecturerView.setText(subject.lecturer);
 
+        if(subject.timeFrom == "" && subject.lecturer == "" && subject.address == ""){
+            viewHolder.mainData.setVisibility(View.GONE);
+            viewHolder.header.setBackgroundColor(Color.rgb(204, 255, 255));
+        } else {
+            viewHolder.mainData.setVisibility(View.VISIBLE);
+            viewHolder.header.setBackgroundColor(Color.WHITE);
+        }
+
         return convertView;
     }
     private class ViewHolder {
         final TextView nameView, timeFromView, timeToView, roomView, addressView, lecturerView ;
+        final LinearLayout header, mainData;
         ViewHolder(View view){
             nameView = (TextView) view.findViewById(R.id.subject_list_item_name);
             timeFromView = (TextView) view.findViewById(R.id.subject_list_item_time_from);
@@ -53,6 +69,8 @@ public class SubjectAdapter extends ArrayAdapter<Subject> {
             roomView = (TextView) view.findViewById(R.id.subject_list_item_room);
             addressView = (TextView) view.findViewById(R.id.subject_list_item_address);
             lecturerView = (TextView) view.findViewById(R.id.subject_list_item_lecturer);
+            mainData = (LinearLayout) view.findViewById(R.id.main_data);
+            header = (LinearLayout) view.findViewById(R.id.header);
         }
     }
 }

@@ -12,11 +12,17 @@ import com.example.schedule.models.SubjectDTO;
 import com.example.schedule.models.SubjectType;
 import com.google.gson.Gson;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 public class GetSubjectsRequest extends AsyncTask<String, Void, ArrayList<Subject>> {
     Gson gson = new Gson();
     SubjectAdapter adapter;
+    Calendar dateAndTime=Calendar.getInstance();
     Context context;
     ArrayList<Subject> subjects;
     public GetSubjectsRequest(SubjectAdapter adapter, Context context, ArrayList<Subject> subjects){
@@ -27,9 +33,19 @@ public class GetSubjectsRequest extends AsyncTask<String, Void, ArrayList<Subjec
     protected ArrayList<Subject> doInBackground(String... term){
         ArrayList<Subject> subjects = new ArrayList<Subject>();
         try{
-            SubjectDTO[] subjectsDTO = gson.fromJson(ApiService.get("https://ruz.fa.ru/api/schedule/group/"+term[0]+"?start="+term[1]+"&finish="+term[1]+"&lng=1"), SubjectDTO[].class);
+            SubjectDTO[] subjectsDTO;
+            if(term.length > 2){
+                subjectsDTO = gson.fromJson(ApiService.get("https://ruz.fa.ru/api/schedule/group/"+term[0]+"?start="+term[1]+"&finish="+term[2]+"&lng=1"), SubjectDTO[].class);
+            } else {
+                subjectsDTO = gson.fromJson(ApiService.get("https://ruz.fa.ru/api/schedule/group/"+term[0]+"?start="+term[1]+"&finish="+term[1]+"&lng=1"), SubjectDTO[].class);
+            }
+            int dayOfWeek = -1;
             for(SubjectDTO subject:subjectsDTO){
+                if(term.length > 2 && dayOfWeek != subject.dayOfWeek){
+                    subjects.add(new Subject(subject.date, "", "", "", subject.dayOfWeekString, "", "", SubjectType.seminar));
+                }
                 subjects.add(new Subject(subject.discipline, subject.date, subject.beginLesson, subject.endLesson, subject.auditorium, subject.building, subject.lecturer, SubjectType.seminar));
+                dayOfWeek = subject.dayOfWeek;
             }
         } catch (Exception e) {
             e.printStackTrace();

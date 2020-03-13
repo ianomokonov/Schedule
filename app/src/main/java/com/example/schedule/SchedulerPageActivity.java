@@ -1,5 +1,6 @@
 package com.example.schedule;
 
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -40,6 +41,7 @@ public class SchedulerPageActivity extends AppCompatActivity {
     Boolean expanded = false;
 
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +50,34 @@ public class SchedulerPageActivity extends AppCompatActivity {
         noDataView = (TextView) findViewById(R.id.subject_no_data);
         subjectsView = (ListView) findViewById(R.id.classesList);
         currentDateTimeView=(TextView)findViewById(R.id.selectedDate);
+        OnSwipeTouchListener swipeListener = new OnSwipeTouchListener(this) {
+
+            public void onSwipeLeft() {
+                //обработка свайпа влево
+                if(expanded){
+                    dateAndTime.add(Calendar.DAY_OF_YEAR, 7);
+                } else {
+                    dateAndTime.add(Calendar.DAY_OF_YEAR, 1);
+                }
+
+                setDateViewText();
+                refreshList();
+            }
+
+            public void onSwipeRight() {
+                //обработка свайпа вправо
+                if(expanded){
+                    dateAndTime.add(Calendar.DAY_OF_YEAR, -7);
+                } else {
+                    dateAndTime.add(Calendar.DAY_OF_YEAR, -1);
+                }
+                setDateViewText();
+                refreshList();
+            }
+
+        };
+        subjectsView.setOnTouchListener(swipeListener);
+        noDataView.setOnTouchListener(swipeListener);
         Bundle arguments = getIntent().getExtras();
 
         initSubjectsList();
@@ -73,7 +103,7 @@ public class SchedulerPageActivity extends AppCompatActivity {
     public void setDate(View v) {
         new DatePickerDialog(this, d,
                 dateAndTime.get(Calendar.YEAR),
-                dateAndTime.get(Calendar.MONTH)-1,
+                dateAndTime.get(Calendar.MONTH),
                 dateAndTime.get(Calendar.DAY_OF_MONTH))
                 .show();
     }
@@ -86,21 +116,29 @@ public class SchedulerPageActivity extends AppCompatActivity {
             button.setImageResource(R.drawable.compress_solid);
         }
         expanded = !expanded;
+        refreshList();
 
     }
 
     // установка начальных даты и времени
     private void setInitialDateTime() {
-                // Текущее время
         Date currentDate = new Date(dateAndTime.getTimeInMillis());
-        // Форматирование времени как "день.месяц.год"
+        this.setDateViewText(dateTOString(currentDate));
+    }
+
+    private String dateTOString(Date date){
         DateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd", Locale.getDefault());
-        this.setDateViewText(dateFormat.format(currentDate));
+        return  dateFormat.format(date);
     }
 
     private void setDateViewText(String dateString){
         currentDate = dateString;
-        dateAndTime.set(Integer.parseInt(dateString.substring(0,4)),Integer.parseInt(dateString.substring(5,7)),Integer.parseInt(dateString.substring(8,10)));
+        dateAndTime.set(Integer.parseInt(dateString.substring(0,4)),Integer.parseInt(dateString.substring(5,7))-1,Integer.parseInt(dateString.substring(8,10)));
+        currentDateTimeView.setText(currentDate);
+    }
+
+    private void setDateViewText(){
+        currentDate = dateTOString(dateAndTime.getTime());
         currentDateTimeView.setText(currentDate);
     }
 
@@ -115,7 +153,22 @@ public class SchedulerPageActivity extends AppCompatActivity {
     private void refreshList(){
         if(currentGroup != null && currentDate != null){
             request = new GetSubjectsRequest(subjectAdapter, this, subjects);
-            request.execute(currentGroup.id, currentDate);
+            if(expanded){
+                int dayOfWeek = 2; // Monday
+                int weekday = dateAndTime.get(Calendar.DAY_OF_WEEK);
+
+                // calculate how much to add
+                int days = weekday - Calendar.MONDAY;
+                Calendar calendar = (Calendar) dateAndTime.clone();
+                calendar.add(Calendar.DAY_OF_YEAR, -days);
+                // now is the date you want
+                Date startDate = calendar.getTime();
+                calendar.add(Calendar.DAY_OF_YEAR, 6);
+                Date finishDate = calendar.getTime();
+                request.execute(currentGroup.id, dateTOString(startDate), dateTOString(finishDate));
+            } else {
+                request.execute(currentGroup.id, currentDate);
+            }
             try {
                 ArrayList<Subject> subjects = request.get();
                 if(subjects.size() > 0){
