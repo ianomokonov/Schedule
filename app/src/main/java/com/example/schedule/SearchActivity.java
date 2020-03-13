@@ -27,25 +27,14 @@ public class SearchActivity extends AppCompatActivity {
     SearchAdapter searchAdapter;
     String type;
     Gson gson = new Gson();
+    Bundle arguments;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         context = this;
         setContentView(R.layout.search_page);
         listView = (ListView) findViewById(R.id.listView);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id) {
-                SearchListItem choosedItem = items.get(position);
-                Intent intent = new Intent(SearchActivity.this, SchedulerPageActivity.class);
-                intent.putExtra("group", gson.toJson(choosedItem));
-                startActivity(intent);
-
-            }
-
-        });
         EditText editText = (EditText) findViewById(R.id.txtSearch);
         editText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -62,8 +51,8 @@ public class SearchActivity extends AppCompatActivity {
             }
 
         });
-        Bundle arguments = getIntent().getExtras();
-        this.initList();
+        arguments = getIntent().getExtras();
+
         if(arguments != null && arguments.containsKey("type")){
             if(arguments.get("type") == GroupLecturer.LECTURER){
                 type = "person";
@@ -71,6 +60,23 @@ public class SearchActivity extends AppCompatActivity {
                 type = "group";
             }
         }
+        this.initList();
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+                SearchListItem choosedItem = items.get(position);
+                Intent intent = new Intent(SearchActivity.this, SchedulerPageActivity.class);
+                intent.putExtra("group", gson.toJson(choosedItem));
+                if(arguments != null && arguments.containsKey("saveData")){
+                    intent.putExtra("saveData", arguments.get("saveData").toString());
+                }
+                startActivity(intent);
+
+            }
+
+        });
         this.initRequest("");
 
 
