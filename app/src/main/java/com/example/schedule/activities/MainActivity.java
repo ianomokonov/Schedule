@@ -1,16 +1,12 @@
-package com.example.schedule;
+package com.example.schedule.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.format.DateUtils;
 import android.view.View;
-import android.widget.DatePicker;
-import android.widget.TextView;
 
-import java.util.Calendar;
+import com.example.schedule.R;
 
 public class MainActivity extends AppCompatActivity {
 

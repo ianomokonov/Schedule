@@ -2,22 +2,16 @@ package com.example.schedule.requests;
 
 import android.content.Context;
 import android.os.AsyncTask;
-import android.widget.ListView;
 
 import com.example.schedule.ApiService;
-import com.example.schedule.R;
-import com.example.schedule.SubjectAdapter;
+import com.example.schedule.adapters.SubjectAdapter;
 import com.example.schedule.models.Subject;
 import com.example.schedule.models.SubjectDTO;
 import com.example.schedule.models.SubjectType;
 import com.google.gson.Gson;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
 
 public class GetSubjectsRequest extends AsyncTask<String, Void, ArrayList<Subject>> {
     Gson gson = new Gson();

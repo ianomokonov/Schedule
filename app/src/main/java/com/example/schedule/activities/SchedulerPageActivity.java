@@ -1,4 +1,4 @@
-package com.example.schedule;
+package com.example.schedule.activities;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
@@ -13,6 +13,10 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.schedule.OnSwipeTouchListener;
+import com.example.schedule.R;
+import com.example.schedule.SaveFavoriteGroupDialog;
+import com.example.schedule.adapters.SubjectAdapter;
 import com.example.schedule.models.Datable;
 import com.example.schedule.models.GroupLecturer;
 import com.example.schedule.models.SearchListItem;

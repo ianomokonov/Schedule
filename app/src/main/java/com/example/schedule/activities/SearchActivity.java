@@ -1,4 +1,4 @@
-package com.example.schedule;
+package com.example.schedule.activities;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,6 +12,8 @@ import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.schedule.R;
+import com.example.schedule.adapters.SearchAdapter;
 import com.example.schedule.models.GroupLecturer;
 import com.example.schedule.models.SearchListItem;
 import com.example.schedule.requests.GetGroupsRequest;

@@ -1,4 +1,4 @@
-package com.example.schedule;
+package com.example.schedule.adapters;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -14,6 +14,7 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.ColorLong;
 import androidx.annotation.ColorRes;
 
+import com.example.schedule.R;
 import com.example.schedule.models.Subject;
 
 import java.util.ArrayList;

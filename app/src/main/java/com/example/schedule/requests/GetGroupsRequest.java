@@ -4,7 +4,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 
 import com.example.schedule.ApiService;
-import com.example.schedule.SearchAdapter;
+import com.example.schedule.adapters.SearchAdapter;
 import com.example.schedule.models.SearchListItem;
 import com.google.gson.Gson;
 
