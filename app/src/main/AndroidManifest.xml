@@ -20,7 +20,8 @@
         </activity>
         <activity android:name=".activities.SchedulerPageActivity" />
         <activity android:name=".activities.SearchActivity" />
-        <activity android:name=".PagerActivity" />
+        <activity android:name=".activities.RoomActivity" />
+        <activity android:name=".activities.LecturersActivity" />
     </application>
 
 </manifest>

@@ -14,7 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.schedule.R;
 import com.example.schedule.adapters.SearchAdapter;
-import com.example.schedule.models.GroupLecturer;
+import com.example.schedule.models.SearchType;
 import com.example.schedule.models.SearchListItem;
 import com.example.schedule.requests.GetGroupsRequest;
 import com.google.gson.Gson;
@@ -30,14 +30,15 @@ public class SearchActivity extends AppCompatActivity {
     String type;
     Gson gson = new Gson();
     Bundle arguments;
+    Class<?> returnClass;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         context = this;
         setContentView(R.layout.search_page);
-        listView = (ListView) findViewById(R.id.listView);
+        listView = findViewById(R.id.listView);
 
-        EditText editText = (EditText) findViewById(R.id.txtSearch);
+        EditText editText = findViewById(R.id.txtSearch);
         editText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -56,11 +57,10 @@ public class SearchActivity extends AppCompatActivity {
         arguments = getIntent().getExtras();
 
         if(arguments != null && arguments.containsKey("type")){
-            if(arguments.get("type") == GroupLecturer.LECTURER){
-                type = "person";
-            } else {
-                type = "group";
-            }
+            type = getType((SearchType) arguments.get("type"));
+        }
+        if(arguments != null && arguments.containsKey("returnClass")){
+            returnClass = (Class<?>)arguments.get("returnClass");
         }
         this.initList();
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -69,8 +69,8 @@ public class SearchActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
                 SearchListItem choosedItem = items.get(position);
-                Intent intent = new Intent(SearchActivity.this, SchedulerPageActivity.class);
-                intent.putExtra("group", gson.toJson(choosedItem));
+                Intent intent = new Intent(SearchActivity.this, returnClass);
+                intent.putExtra("searchItem", gson.toJson(choosedItem));
                 if(arguments != null && arguments.containsKey("saveData")){
                     intent.putExtra("saveData", arguments.get("saveData").toString());
                 }
@@ -85,6 +85,20 @@ public class SearchActivity extends AppCompatActivity {
 
     }
 
+    private String getType(SearchType type){
+        switch (type){
+            case GROUP:{
+                return "group";
+            }
+            case LECTURER:{
+                return "person";
+            }
+            case AUDITORIUM:{
+                return "auditorium";
+            }
+        }
+        return "group";
+    }
 
 
     private  void initList(){

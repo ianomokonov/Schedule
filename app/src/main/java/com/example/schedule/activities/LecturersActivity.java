@@ -8,9 +8,8 @@ import com.example.schedule.BasePage;
 import com.example.schedule.R;
 import com.example.schedule.SchedulerPage;
 import com.example.schedule.models.Datable;
-import com.example.schedule.requests.GetSubjectsRequest;
 
-public class SchedulerPageActivity extends BasePage implements Datable {
+public class LecturersActivity extends BasePage implements Datable {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,14 +18,6 @@ public class SchedulerPageActivity extends BasePage implements Datable {
         setActualIcon();
     }
 
-    public void refreshList(){
-
-        if(searchListItem != null && currentDate != null){
-            GetSubjectsRequest request = new GetSubjectsRequest(subjectAdapter, this, subjects);
-
-            handleExpanded(request);
-        }
-    }
 
 
     @Override
@@ -38,8 +29,8 @@ public class SchedulerPageActivity extends BasePage implements Datable {
         ImageButton scheduler = (ImageButton) findViewById(R.id.show_scheduler);
         ImageButton lectures = (ImageButton) findViewById(R.id.show_lecturers);
         ImageButton rooms = (ImageButton) findViewById(R.id.show_rooms);
-        scheduler.setImageResource(R.drawable.calendar_alt_regular);
-        lectures.setImageResource(R.drawable.user_graduate_solid_gray);
+        scheduler.setImageResource(R.drawable.calendar_alt_regular_gray);
+        lectures.setImageResource(R.drawable.user_graduate_solid);
         rooms.setImageResource(R.drawable.door_open_solid_gray);
     }
 }
