@@ -14,18 +14,18 @@
         <LinearLayout
             android:id="@+id/filters"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="40dp"
             android:layout_weight="0.1"
             android:orientation="horizontal"
+            android:gravity="center_vertical"
             app:layout_constraintTop_toTopOf="parent"
             android:paddingHorizontal="15dp"
-            android:paddingTop="15dp"
-            android:background="#33CC66">
+            android:background="@color/colorPrimaryDark">
 
             <TextView
                 android:id="@+id/groups"
-                android:layout_width="90pt"
-                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_weight="0.5"
                 android:textColor="#ffffff"
                 android:gravity="left"
@@ -34,9 +34,9 @@
                 android:onClick="onGroupClick"/>
 
             <TextView android:id="@+id/selectedDate"
-                android:layout_width="90pt"
+                android:layout_width="wrap_content"
                 android:layout_weight="0.5"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:gravity="right"
 
                 android:text="Выбрать дату"
@@ -62,41 +62,51 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="40dp"
+            android:paddingVertical="5dp"
             android:layout_weight="0.1"
             android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:background="#33CC66">
-            <Button
-                android:id="@+id/myScheduler"
-                android:layout_width="90dp"
-                android:layout_weight="0.5"
+            android:background="@color/colorPrimaryDark">
+            <ImageButton
+                android:id="@+id/show_scheduler"
+                android:layout_width="50dp"
                 android:layout_height="match_parent"
-                android:layout_margin="0dp"
-                android:padding="0dp"
-                android:text="Мое расписание"
-                android:background="#3300FF"
-                android:textSize="12sp"
-                android:textColor="#FFFFFF"/>
-            <Button
-                android:id="@+id/teachers"
-                android:layout_width="90dp"
-                android:layout_weight="0.5"
+                android:padding="10dp"
+                android:src="@drawable/calendar_alt_regular"
+                android:scaleType="centerInside"
+                android:background="@color/colorPrimaryDark"
+                android:layout_weight="0.25"
+                android:onClick="onExpandClick"/>
+            <ImageButton
+                android:id="@+id/show_lecturers"
+                android:layout_width="50dp"
                 android:layout_height="match_parent"
-                android:layout_margin="0dp"
-                android:padding="0dp"
-                android:text="Преподаватели"
-                android:textSize="12sp"
-                android:background="#3399FF"
-                android:textColor="#FFFFFF"/>
+                android:padding="10dp"
+                android:src="@drawable/user_graduate_solid_gray"
+                android:scaleType="centerInside"
+                android:background="@color/colorPrimaryDark"
+                android:layout_weight="0.25"
+                android:onClick="onExpandClick"/>
+            <ImageButton
+                android:id="@+id/show_rooms"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:padding="10dp"
+                android:src="@drawable/door_open_solid_gray"
+                android:scaleType="centerInside"
+                android:background="@color/colorPrimaryDark"
+                android:layout_weight="0.25"
+                android:onClick="onExpandClick"/>
             <ImageButton
                 android:id="@+id/subject_expand"
                 android:layout_width="50dp"
                 android:layout_height="match_parent"
                 android:padding="10dp"
-                android:src="@drawable/expand_solid_white"
-                android:scaleType="fitXY"
-                android:background="#3399FF"
+                android:src="@drawable/expand_solid_gray"
+                android:scaleType="centerInside"
+                android:background="@color/colorPrimaryDark"
+                android:layout_weight="0.25"
                 android:onClick="onExpandClick"/>
         </LinearLayout>
 
