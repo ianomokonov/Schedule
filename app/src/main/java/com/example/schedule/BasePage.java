@@ -1,5 +1,6 @@
 package com.example.schedule;
 
+import android.app.ActivityOptions;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -159,23 +160,27 @@ public class BasePage extends AppCompatActivity {
     }
 
     public void goScheduler(View v){
+        ActivityOptions options = ActivityOptions.makeCustomAnimation(context,0, 0);
         Intent intent = new Intent(context, SchedulerPageActivity.class);
-        startActivity(intent);
+        startActivity(intent, options.toBundle());
     }
 
     public void goLecturers(View v){
+        ActivityOptions options = ActivityOptions.makeCustomAnimation(context,0, 0);
         Intent intent = new Intent(context, LecturersActivity.class);
-        startActivity(intent);
+        startActivity(intent, options.toBundle());
     }
 
     public void goRooms(View v){
+        ActivityOptions options = ActivityOptions.makeCustomAnimation(context,0, 0);
         Intent intent = new Intent(context, RoomActivity.class);
-        startActivity(intent);
+        startActivity(intent, options.toBundle());
     }
 
     public void goRoomsCapacity(View v){
+        ActivityOptions options = ActivityOptions.makeCustomAnimation(context,0, 0);
         Intent intent = new Intent(context, RoomsCapacityActivity.class);
-        startActivity(intent);
+        startActivity(intent, options.toBundle());
     }
 
     public void onSearchPanelClick(View v){
