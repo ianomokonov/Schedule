@@ -13,7 +13,7 @@ public class LecturersActivity extends BasePage implements Datable {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onPageCreate(this, "Преподаватель");
+        super.onPageCreate(this, "Преподаватель", true);
         super.onCreate(savedInstanceState);
         setTitle("Расписание преподавателей");
         setActualIcon();

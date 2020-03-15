@@ -14,7 +14,7 @@ public class SchedulerPageActivity extends BasePage implements Datable {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onPageCreate(this, "Группа");
+        super.onPageCreate(this, "Группа", true);
         super.onCreate(savedInstanceState);
         setTitle("Расписание студентов");
         setActualIcon();

@@ -17,7 +17,7 @@ public class RoomActivity extends BasePage implements Datable {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onPageCreate(this, "Аудитория");
+        super.onPageCreate(this, "Аудитория", true);
         super.onCreate(savedInstanceState);
         setTitle("Расписание аудиторий");
         noDataView.setText("Укажите аудиторию");

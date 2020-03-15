@@ -31,6 +31,7 @@ public class RoomOpacityAdapter extends ArrayAdapter<RoomSubject> {
         this.layout = resource;
         this.inflater = LayoutInflater.from(context);
     }
+
     public View getView(int position, View convertView, ViewGroup parent) {
 
         final ViewHolder viewHolder;

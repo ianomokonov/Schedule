@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.ImageButton;
@@ -47,11 +48,13 @@ public class BasePage extends AppCompatActivity {
     protected ListView subjectsView;
     protected TextView noDataView;
     protected Boolean expanded = false;
+    protected Boolean showExpandButton = true;
 
 
-    protected void onPageCreate(Context context, String searchFilterName) {
+    protected void onPageCreate(Context context, String searchFilterName, Boolean showExpandButton) {
         this.context = context;
         setContentView(R.layout.activity_scheduler_page);
+        this.showExpandButton = showExpandButton;
         groupView = findViewById(R.id.groups);
         noDataView = findViewById(R.id.subject_no_data);
         subjectsView = findViewById(R.id.classesList);
@@ -126,12 +129,33 @@ public class BasePage extends AppCompatActivity {
 
         return  item;
     }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
         getMenuInflater().inflate(R.menu.scheduler_menu, menu);
+        menu.getItem(1).setEnabled(this.showExpandButton);
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch(id){
+//            case R.id.settings :
+//                return true;
+//            case R.id.export:
+//                return true;
+            case R.id.expand:
+                if(this.expanded){
+                    item.setTitle("Просмотр недели");
+                } else {
+                    item.setTitle("Просмотр дня");
+                }
+
+                onExpandClick();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     public void goScheduler(View v){
@@ -162,7 +186,7 @@ public class BasePage extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public  void onExpandClick(View v){
+    public  void onExpandClick(){
 //        ImageButton button = (ImageButton) findViewById(R.id.subject_expand);
 //        if(expanded){
 //            button.setImageResource(R.drawable.expand_solid_gray);

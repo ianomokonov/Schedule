@@ -31,7 +31,7 @@ public class RoomsCapacityActivity extends BasePage implements Datable {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onPageCreate(this, "Здание");
+        super.onPageCreate(this, "Здание", false);
         super.onCreate(savedInstanceState);
         setTitle("Загруженность аудиторий");
         header = findViewById(R.id.room_opacity_header);
