@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.schedule.activities.LecturersActivity;
 import com.example.schedule.activities.RoomActivity;
+import com.example.schedule.activities.RoomsCapacityActivity;
 import com.example.schedule.activities.SchedulerPageActivity;
 import com.example.schedule.activities.SearchActivity;
 import com.example.schedule.adapters.SubjectAdapter;
@@ -48,7 +49,7 @@ public class BasePage extends AppCompatActivity {
     protected Boolean expanded = false;
 
 
-    protected void onPageCreate(Context context) {
+    protected void onPageCreate(Context context, String searchFilterName) {
         this.context = context;
         setContentView(R.layout.activity_scheduler_page);
         groupView = findViewById(R.id.groups);
@@ -56,6 +57,7 @@ public class BasePage extends AppCompatActivity {
         subjectsView = findViewById(R.id.classesList);
         subjectsView.setNestedScrollingEnabled(true);
         currentDateView = findViewById(R.id.selectedDate);
+        groupView.setText(searchFilterName);
         groupView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
@@ -147,6 +149,11 @@ public class BasePage extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void goRoomsCapacity(View v){
+        Intent intent = new Intent(context, RoomsCapacityActivity.class);
+        startActivity(intent);
+    }
+
     public void onSearchPanelClick(View v){
         Intent intent = new Intent(context, SearchActivity.class);
         intent.putExtra("type", SearchType.GROUP);
@@ -156,12 +163,12 @@ public class BasePage extends AppCompatActivity {
     }
 
     public  void onExpandClick(View v){
-        ImageButton button = (ImageButton) findViewById(R.id.subject_expand);
-        if(expanded){
-            button.setImageResource(R.drawable.expand_solid_gray);
-        } else {
-            button.setImageResource(R.drawable.compress_solid_white);
-        }
+//        ImageButton button = (ImageButton) findViewById(R.id.subject_expand);
+//        if(expanded){
+//            button.setImageResource(R.drawable.expand_solid_gray);
+//        } else {
+//            button.setImageResource(R.drawable.compress_solid_white);
+//        }
         expanded = !expanded;
         refreshList();
 
@@ -220,6 +227,7 @@ public class BasePage extends AppCompatActivity {
         } else {
             subjectsView.setVisibility(View.GONE);
             noDataView.setVisibility(View.VISIBLE);
+            noDataView.setText("Нет пар");
         }
     }
 

@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class SubjectDTO {
     public String auditorium;
+    public int auditoriumOid;
     public String beginLesson;
     public String endLesson;
     public String building;

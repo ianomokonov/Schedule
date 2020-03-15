@@ -13,8 +13,9 @@ public class LecturersActivity extends BasePage implements Datable {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onPageCreate(this);
+        super.onPageCreate(this, "Преподаватель");
         super.onCreate(savedInstanceState);
+        setTitle("Расписание преподавателей");
         setActualIcon();
     }
 
@@ -29,8 +30,10 @@ public class LecturersActivity extends BasePage implements Datable {
         ImageButton scheduler = (ImageButton) findViewById(R.id.show_scheduler);
         ImageButton lectures = (ImageButton) findViewById(R.id.show_lecturers);
         ImageButton rooms = (ImageButton) findViewById(R.id.show_rooms);
+        ImageButton roomsСapacity = (ImageButton) findViewById(R.id.show_rooms_capacity);
         scheduler.setImageResource(R.drawable.calendar_alt_regular_gray);
         lectures.setImageResource(R.drawable.user_graduate_solid);
         rooms.setImageResource(R.drawable.door_open_solid_gray);
+        roomsСapacity.setImageResource(R.drawable.tachometer_alt_solid_gray);
     }
 }

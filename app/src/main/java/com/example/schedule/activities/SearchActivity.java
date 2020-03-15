@@ -96,6 +96,9 @@ public class SearchActivity extends AppCompatActivity {
             case AUDITORIUM:{
                 return "auditorium";
             }
+            case BUILDING:{
+                return "building";
+            }
         }
         return "group";
     }

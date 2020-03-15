@@ -45,6 +45,97 @@
                 android:onClick="setDate" />
 
         </LinearLayout>
+        <LinearLayout
+            android:id="@+id/room_opacity_header"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent">
+            <TextView
+                android:id="@+id/room_name"
+                android:layout_width="50dp"
+                android:gravity="center"
+                android:layout_weight="0.2"
+                android:layout_height="wrap_content"
+                android:text="№"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"/>
+            <TextView
+                android:id="@+id/first_class"
+                android:layout_weight="0.1"
+                android:gravity="center"
+                android:text="1"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toRightOf="@id/room_name"/>
+            <TextView
+                android:id="@+id/second_class"
+                android:layout_width="50dp"
+                android:gravity="center"
+                android:text="2"
+                android:layout_weight="0.1"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toRightOf="@id/first_class"/>
+            <TextView
+                android:id="@+id/third_class"
+                android:layout_width="50dp"
+                android:text="3"
+                android:layout_weight="0.1"
+                android:gravity="center"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toRightOf="@id/second_class"/>
+            <TextView
+                android:id="@+id/forth_class"
+                android:layout_width="50dp"
+                android:gravity="center"
+                android:text="4"
+                android:layout_weight="0.1"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="@id/third_class"/>
+            <TextView
+                android:id="@+id/fifth_class"
+                android:layout_width="50dp"
+                android:text="5"
+                android:layout_weight="0.1"
+                android:gravity="center"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toRightOf="@id/forth_class"/>
+            <TextView
+                android:id="@+id/sixth_class"
+                android:text="6"
+                android:layout_width="50dp"
+                android:gravity="center"
+                android:layout_weight="0.1"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toRightOf="@id/fifth_class"/>
+            <TextView
+                android:id="@+id/seventh_class"
+                android:layout_width="50dp"
+                android:gravity="center"
+                android:text="7"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.1"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toRightOf="@id/sixth_class"/>
+
+            <TextView
+                android:id="@+id/eighth_class"
+                android:layout_width="50dp"
+                android:text="8"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_weight="0.1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintLeft_toRightOf="@id/seventh_class"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </LinearLayout>
         <ListView
             android:id="@+id/classesList"
             android:layout_width="match_parent"
@@ -99,15 +190,15 @@
                 android:layout_weight="0.25"
                 android:onClick="goRooms"/>
             <ImageButton
-                android:id="@+id/subject_expand"
+                android:id="@+id/show_rooms_capacity"
                 android:layout_width="50dp"
                 android:layout_height="match_parent"
                 android:padding="10dp"
-                android:src="@drawable/expand_solid_gray"
+                android:src="@drawable/tachometer_alt_solid_gray"
                 android:scaleType="centerInside"
                 android:background="@color/colorPrimaryDark"
                 android:layout_weight="0.25"
-                android:onClick="onExpandClick"/>
+                android:onClick="goRoomsCapacity"/>
         </LinearLayout>
 
     </LinearLayout>

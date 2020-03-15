@@ -17,9 +17,10 @@ public class RoomActivity extends BasePage implements Datable {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onPageCreate(this);
-        super.groupView.setText("Аудитория");
+        super.onPageCreate(this, "Аудитория");
         super.onCreate(savedInstanceState);
+        setTitle("Расписание аудиторий");
+        noDataView.setText("Укажите аудиторию");
         setActualIcon();
     }
 
@@ -57,8 +58,10 @@ public class RoomActivity extends BasePage implements Datable {
         ImageButton scheduler = (ImageButton) findViewById(R.id.show_scheduler);
         ImageButton lectures = (ImageButton) findViewById(R.id.show_lecturers);
         ImageButton rooms = (ImageButton) findViewById(R.id.show_rooms);
+        ImageButton roomsСapacity = (ImageButton) findViewById(R.id.show_rooms_capacity);
         scheduler.setImageResource(R.drawable.calendar_alt_regular_gray);
         lectures.setImageResource(R.drawable.user_graduate_solid_gray);
         rooms.setImageResource(R.drawable.door_open_solid);
+        roomsСapacity.setImageResource(R.drawable.tachometer_alt_solid_gray);
     }
 }
