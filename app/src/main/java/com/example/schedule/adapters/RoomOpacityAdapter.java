@@ -60,7 +60,7 @@ public class RoomOpacityAdapter extends ArrayAdapter<RoomSubject> {
         final TextView[] views = new TextView[8];
         ViewHolder(View view){
             numberView = (TextView) view.findViewById(R.id.room_name);
-            views[0] = (TextView) view.findViewById(R.id.first_class);
+            views[0] = view.findViewById(R.id.first_class);
             views[1] = (TextView) view.findViewById(R.id.second_class);
             views[2] = (TextView) view.findViewById(R.id.third_class);
             views[3] = (TextView) view.findViewById(R.id.forth_class);
