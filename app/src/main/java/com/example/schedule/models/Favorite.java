@@ -15,23 +15,4 @@ public class Favorite {
 //        this.isDefault = isDefault;
 //    }
 
-    public int getId(){
-        return id;
-    }
-
-    public String getLabel(){
-        return label;
-    }
-
-    public String getDescription(){
-        return description;
-    }
-
-    public String getType(){
-        return type;
-    }
-
-    public Boolean getDef(){
-        return isDefault;
-    }
 }
