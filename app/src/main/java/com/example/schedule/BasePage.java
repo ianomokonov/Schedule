@@ -10,7 +10,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
-import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -22,8 +21,8 @@ import com.example.schedule.activities.RoomsCapacityActivity;
 import com.example.schedule.activities.SchedulerPageActivity;
 import com.example.schedule.activities.SearchActivity;
 import com.example.schedule.adapters.SubjectAdapter;
-import com.example.schedule.models.SearchType;
 import com.example.schedule.models.SearchListItem;
+import com.example.schedule.models.SearchType;
 import com.example.schedule.models.Subject;
 import com.example.schedule.requests.GetSubjectsRequest;
 import com.google.gson.Gson;
