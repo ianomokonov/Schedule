@@ -39,19 +39,9 @@ public class ScheduleDB implements IDataBase {
         values.put(KEY_isStud, type.toString());
 
         db.insert(TABLE_USER, null, values);
-
-//        db.execSQL("INSERT INTO "+ TABLE_USER + " VALUES " + type);
     }
 
     public UserType getUser(){
-//        SQLiteDatabase db = this.getReadableDatabase();
-//
-//        Cursor cursor = db.query(TABLE_USER, new String[] { KEY_ID,
-//                        KEY_isStud}, KEY_isStud, null, null, null, KEY_ID + " DESC ", " 1 ");
-//
-//        if (cursor != null){
-//            cursor.moveToFirst();
-//        }
 
         Cursor query = db.rawQuery("SELECT * FROM user;", null);
         UserType user = UserType.NONE;
@@ -61,14 +51,13 @@ public class ScheduleDB implements IDataBase {
 
         return user;
     }
-
     public void setFavorite(Favorite favoriteItem){
         ContentValues values = new ContentValues();
 
         values.put(KEY_LABEL, favoriteItem.label);
         values.put(KEY_DESC, favoriteItem.description);
-        values.put(KEY_TYPE, favoriteItem.type);
-        values.put(KEY_isDef, favoriteItem.type);
+        values.put(KEY_TYPE, favoriteItem.type.toString());
+        values.put(KEY_isDef, favoriteItem.isDefault);
 
         db.insert(TABLE_FAVORITE, null, values);
         //db.close();

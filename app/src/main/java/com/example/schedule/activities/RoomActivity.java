@@ -8,6 +8,7 @@ import android.widget.ImageButton;
 import com.example.schedule.BasePage;
 import com.example.schedule.R;
 import com.example.schedule.models.Datable;
+import com.example.schedule.models.Favorite;
 import com.example.schedule.models.SearchListItem;
 import com.example.schedule.models.SearchType;
 import com.example.schedule.requests.GetRoomClassesRequest;
@@ -41,7 +42,13 @@ public class RoomActivity extends BasePage implements Datable {
 
     @Override
     public void saveFavoriteGroup(boolean save) {
-        //TODO сохранение группы в избранное
+        Favorite favorite = new Favorite();
+        favorite.label = super.searchListItem.label;
+        favorite.id = super.searchListItem.id;
+        favorite.description = super.searchListItem.description;
+        favorite.isDefault = save;
+        favorite.type = SearchType.AUDITORIUM;
+        super.scheduleDB.setFavorite(favorite);
     }
 
     @Override

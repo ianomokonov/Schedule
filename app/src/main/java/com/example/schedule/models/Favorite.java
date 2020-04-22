@@ -1,10 +1,10 @@
 package com.example.schedule.models;
 
 public class Favorite {
-    public int id;
+    public String id;
     public String label;
     public String description;
-    public String type;
+    public SearchType type;
     public boolean isDefault;
 
 //    public Favorite(int id, String label, String description, String type, boolean isDefault){

@@ -4,6 +4,7 @@ import android.app.ActivityOptions;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
@@ -50,11 +51,14 @@ public class BasePage extends AppCompatActivity {
     protected TextView noDataView;
     protected Boolean expanded = false;
     protected Boolean showExpandButton = true;
+    protected ScheduleDB scheduleDB;
 
 
     protected void onPageCreate(Context context, String searchFilterName, Boolean showExpandButton) {
         this.context = context;
         setContentView(R.layout.activity_scheduler_page);
+        SQLiteDatabase db = getBaseContext().openOrCreateDatabase("schedule.db", MODE_PRIVATE, null);
+        scheduleDB = new ScheduleDB(db);
         this.showExpandButton = showExpandButton;
         groupView = findViewById(R.id.groups);
         noDataView = findViewById(R.id.subject_no_data);
