@@ -2,17 +2,12 @@ package com.example.schedule.adapters;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import androidx.annotation.ColorInt;
-import androidx.annotation.ColorLong;
-import androidx.annotation.ColorRes;
 
 import com.example.schedule.R;
 import com.example.schedule.models.Subject;
@@ -49,6 +44,7 @@ public class SubjectAdapter extends ArrayAdapter<Subject> {
         viewHolder.roomView.setText(subject.room);
         viewHolder.addressView.setText(subject.address);
         viewHolder.lecturerView.setText(subject.lecturer);
+        viewHolder.typeView.setText(subject.type);
 
         if(subject.timeFrom == "" && subject.lecturer == "" && subject.address == ""){
             viewHolder.mainData.setVisibility(View.GONE);
@@ -61,7 +57,7 @@ public class SubjectAdapter extends ArrayAdapter<Subject> {
         return convertView;
     }
     private class ViewHolder {
-        final TextView nameView, timeFromView, timeToView, roomView, addressView, lecturerView ;
+        final TextView nameView, timeFromView, timeToView, roomView, addressView, lecturerView, typeView ;
         final LinearLayout header, mainData;
         ViewHolder(View view){
             nameView = (TextView) view.findViewById(R.id.subject_list_item_name);
@@ -70,6 +66,7 @@ public class SubjectAdapter extends ArrayAdapter<Subject> {
             roomView = (TextView) view.findViewById(R.id.subject_list_item_room);
             addressView = (TextView) view.findViewById(R.id.subject_list_item_address);
             lecturerView = (TextView) view.findViewById(R.id.subject_list_item_lecturer);
+            typeView = (TextView) view.findViewById(R.id.subject_list_item_type);
             mainData = (LinearLayout) view.findViewById(R.id.main_data);
             header = (LinearLayout) view.findViewById(R.id.header);
         }
