@@ -35,7 +35,7 @@ public class GetSubjectsRequest extends AsyncTask<String, Void, ArrayList<Subjec
             int dayOfWeek = -1;
             for(SubjectDTO subject:subjectsDTO){
                 if(term.length > 2 && dayOfWeek != subject.dayOfWeek){
-                    subjects.add(new Subject(subject.date, "", "", "", subject.dayOfWeekString, "", "", subject.kindOfWork));
+                    subjects.add(new Subject("", "", subject.date, subject.dayOfWeekString, "", "", "", subject.kindOfWork));
                 }
                 subjects.add(new Subject(subject.discipline, subject.date, subject.beginLesson, subject.endLesson, subject.auditorium, subject.building, subject.lecturer, subject.kindOfWork));
                 dayOfWeek = subject.dayOfWeek;

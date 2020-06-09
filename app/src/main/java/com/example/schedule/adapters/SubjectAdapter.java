@@ -46,19 +46,45 @@ public class SubjectAdapter extends ArrayAdapter<Subject> {
         viewHolder.lecturerView.setText(subject.lecturer);
         viewHolder.typeView.setText(subject.type);
 
-        if(subject.timeFrom == "" && subject.lecturer == "" && subject.address == ""){
+        if(subject.name == "" && subject.lecturer == "" && subject.address == ""){
             viewHolder.mainData.setVisibility(View.GONE);
+            viewHolder.timeData.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT));
             viewHolder.header.setBackgroundColor(Color.rgb(204, 255, 255));
         } else {
+            viewHolder.timeData.setLayoutParams(new LinearLayout.LayoutParams(150, ViewGroup.LayoutParams.MATCH_PARENT));
             viewHolder.mainData.setVisibility(View.VISIBLE);
             viewHolder.header.setBackgroundColor(Color.WHITE);
+
+            switch (subject.type){
+                case "Лекция": {
+                    viewHolder.color.setBackgroundColor(Color.rgb(179, 225, 133));
+                    break;
+                }
+                case "Семинар": {
+                    viewHolder.color.setBackgroundColor(Color.rgb(100,	149,	237));
+                    break;
+                }
+                case "Предэкзаменационная консультация": {
+                    viewHolder.color.setBackgroundColor(Color.rgb(221,	128,	204));
+                    break;
+                }
+                case "Экзамен": {
+                    viewHolder.color.setBackgroundColor(Color.rgb(239,	48,	56));
+                    break;
+                }
+
+                default: {
+                    viewHolder.color.setBackgroundColor(Color.rgb(220,	220,	220));
+                    break;
+                }
+            }
         }
 
         return convertView;
     }
     private class ViewHolder {
         final TextView nameView, timeFromView, timeToView, roomView, addressView, lecturerView, typeView ;
-        final LinearLayout header, mainData;
+        final LinearLayout header, mainData, timeData, color;
         ViewHolder(View view){
             nameView = (TextView) view.findViewById(R.id.subject_list_item_name);
             timeFromView = (TextView) view.findViewById(R.id.subject_list_item_time_from);
@@ -68,7 +94,9 @@ public class SubjectAdapter extends ArrayAdapter<Subject> {
             lecturerView = (TextView) view.findViewById(R.id.subject_list_item_lecturer);
             typeView = (TextView) view.findViewById(R.id.subject_list_item_type);
             mainData = (LinearLayout) view.findViewById(R.id.main_data);
+            timeData = (LinearLayout) view.findViewById(R.id.time_data);
             header = (LinearLayout) view.findViewById(R.id.header);
+            color = (LinearLayout) view.findViewById(R.id.color_type);
         }
     }
 }

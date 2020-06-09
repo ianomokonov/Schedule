@@ -23,6 +23,18 @@ public class MainActivity extends AppCompatActivity {
         SQLiteDatabase db = getBaseContext().openOrCreateDatabase("schedule.db", MODE_PRIVATE, null);
         scheduleDB = new ScheduleDB(db);
         UserType user = scheduleDB.getUser();
+        if(user != null && user != UserType.NONE){
+            switch (user){
+                case STUDENT:{
+                    onStudentClick(null);
+                    break;
+                }
+                case LECTURER:{
+                    onLecturerClick(null);
+                    break;
+                }
+            }
+        }
     }
 
     public void onStudentClick(View view) {

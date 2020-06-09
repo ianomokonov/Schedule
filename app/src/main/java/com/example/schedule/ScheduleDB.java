@@ -36,7 +36,7 @@ public class ScheduleDB implements IDataBase {
     public void setUser(UserType type){
         ContentValues values = new ContentValues();
         values.put(KEY_isStud, type.toString());
-
+        db.delete(TABLE_USER, null, null);
         db.insert(TABLE_USER, null, values);
     }
 
@@ -44,7 +44,7 @@ public class ScheduleDB implements IDataBase {
 
         Cursor query = db.rawQuery("SELECT * FROM user;", null);
         UserType user = UserType.NONE;
-        if(query.moveToFirst()){
+        if(query.moveToLast()){
             user = UserType.valueOf(query.getString(1));
         }
 

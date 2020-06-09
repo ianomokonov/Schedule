@@ -17,6 +17,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.schedule.activities.LecturersActivity;
+import com.example.schedule.activities.MainActivity;
 import com.example.schedule.activities.RoomActivity;
 import com.example.schedule.activities.RoomsCapacityActivity;
 import com.example.schedule.activities.SchedulerPageActivity;
@@ -25,6 +26,7 @@ import com.example.schedule.adapters.SubjectAdapter;
 import com.example.schedule.models.SearchListItem;
 import com.example.schedule.models.SearchType;
 import com.example.schedule.models.Subject;
+import com.example.schedule.models.UserType;
 import com.example.schedule.requests.GetSubjectsRequest;
 import com.google.gson.Gson;
 
@@ -129,7 +131,7 @@ public class BasePage extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
 
         getMenuInflater().inflate(R.menu.scheduler_menu, menu);
-        menu.getItem(1).setEnabled(this.showExpandButton);
+        menu.getItem(0).setEnabled(this.showExpandButton);
         return true;
     }
 
@@ -145,6 +147,14 @@ public class BasePage extends AppCompatActivity {
                 }
 
                 onExpandClick();
+                return true;
+            case R.id.exit:
+                SQLiteDatabase db = getBaseContext().openOrCreateDatabase("schedule.db", MODE_PRIVATE, null);
+                scheduleDB = new ScheduleDB(db);
+                Intent intent = new Intent(context, MainActivity.class);
+                scheduleDB.setUser(UserType.NONE);
+                UserType user = scheduleDB.getUser();
+                startActivity(intent);
                 return true;
         }
         return super.onOptionsItemSelected(item);
