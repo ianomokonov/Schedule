@@ -65,14 +65,6 @@ public class BasePage extends AppCompatActivity {
         subjectsView.setNestedScrollingEnabled(true);
         currentDateView = findViewById(R.id.selectedDate);
         groupView.setText(searchFilterName);
-        groupView.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                SaveFavoriteGroupDialog dialog = new SaveFavoriteGroupDialog();
-                dialog.show(getSupportFragmentManager(), "custom");
-                return  true;
-            }
-        });
         OnSwipeTouchListener swipeListener = new OnSwipeTouchListener(this) {
 
             public void onSwipeLeft() {
@@ -145,10 +137,6 @@ public class BasePage extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         switch(id){
-//            case R.id.settings :
-//                return true;
-//            case R.id.export:
-//                return true;
             case R.id.expand:
                 if(this.expanded){
                     item.setTitle("Просмотр недели");
@@ -195,15 +183,8 @@ public class BasePage extends AppCompatActivity {
     }
 
     public  void onExpandClick(){
-//        ImageButton button = (ImageButton) findViewById(R.id.subject_expand);
-//        if(expanded){
-//            button.setImageResource(R.drawable.expand_solid_gray);
-//        } else {
-//            button.setImageResource(R.drawable.compress_solid_white);
-//        }
         expanded = !expanded;
         refreshList();
-
     }
 
     public void setDate(View v) {

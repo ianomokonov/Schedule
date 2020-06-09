@@ -1,6 +1,5 @@
 package com.example.schedule.activities;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -9,23 +8,16 @@ import android.widget.LinearLayout;
 
 import com.example.schedule.BasePage;
 import com.example.schedule.R;
-import com.example.schedule.SchedulerPage;
 import com.example.schedule.adapters.RoomOpacityAdapter;
-import com.example.schedule.adapters.SubjectAdapter;
-import com.example.schedule.models.Datable;
-import com.example.schedule.models.Favorite;
 import com.example.schedule.models.RoomSubject;
 import com.example.schedule.models.SearchListItem;
 import com.example.schedule.models.SearchType;
-import com.example.schedule.models.Subject;
-import com.example.schedule.requests.GetRoomClassesRequest;
 import com.example.schedule.requests.GetRoomsCapacityRequest;
-import com.example.schedule.requests.GetSubjectsRequest;
 
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
-public class RoomsCapacityActivity extends BasePage implements Datable {
+public class RoomsCapacityActivity extends BasePage {
     ArrayList<RoomSubject> rooms = new ArrayList<>();
     RoomOpacityAdapter roomAdapter;
     LinearLayout header;
@@ -84,17 +76,6 @@ public class RoomsCapacityActivity extends BasePage implements Datable {
         }
     }
 
-
-    @Override
-    public void saveFavoriteGroup(boolean save) {
-        Favorite favorite = new Favorite();
-        favorite.label = super.searchListItem.label;
-        favorite.id = super.searchListItem.id;
-        favorite.description = super.searchListItem.description;
-        favorite.isDefault = save;
-        favorite.type = SearchType.BUILDING;
-        super.scheduleDB.setFavorite(favorite);
-    }
 
     public void setActualIcon(){
         ImageButton scheduler = (ImageButton) findViewById(R.id.show_scheduler);

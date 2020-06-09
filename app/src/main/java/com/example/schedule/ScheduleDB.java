@@ -4,7 +4,6 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.example.schedule.models.Favorite;
 import com.example.schedule.models.IDataBase;
 import com.example.schedule.models.UserType;
 
@@ -50,33 +49,5 @@ public class ScheduleDB implements IDataBase {
         }
 
         return user;
-    }
-    public void setFavorite(Favorite favoriteItem){
-        ContentValues values = new ContentValues();
-
-        values.put(KEY_LABEL, favoriteItem.label);
-        values.put(KEY_DESC, favoriteItem.description);
-        values.put(KEY_TYPE, favoriteItem.type.toString());
-        values.put(KEY_isDef, favoriteItem.isDefault);
-
-        db.insert(TABLE_FAVORITE, null, values);
-        //db.close();
-
-//        db.execSQL("INSERT INTO "+ TABLE_FAVORITE + " VALUES (" + favoriteItem.label + ", "
-//        + favoriteItem.description + ", " + favoriteItem.type + ", " + favoriteItem.isDefault + ")");
-    }
-
-    public int updateFavorite(int id, String type, boolean isDefault){
-        ContentValues values = new ContentValues();
-
-        values.put(KEY_TYPE, type);
-        values.put(KEY_isDef, isDefault);
-
-        return db.update(TABLE_FAVORITE, values, KEY_ID + " = ?",
-                new String[] { String.valueOf(id) });
-    }
-
-    public void removeFavorite(int id, String type){
-        db.delete(TABLE_FAVORITE, KEY_ID + " = ?", new String[] { String.valueOf(id) });
     }
 }

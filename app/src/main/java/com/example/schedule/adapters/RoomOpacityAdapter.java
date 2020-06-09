@@ -49,7 +49,7 @@ public class RoomOpacityAdapter extends ArrayAdapter<RoomSubject> {
             if(room.subjects[i] == null){
                 viewHolder.views[i].setBackgroundColor(Color.rgb(204, 255, 255));
             } else {
-                viewHolder.views[i].setBackgroundColor(Color.rgb(255, 255, 255));
+                viewHolder.views[i].setBackgroundColor(Color.rgb(240, 101, 101));
             }
         }
 

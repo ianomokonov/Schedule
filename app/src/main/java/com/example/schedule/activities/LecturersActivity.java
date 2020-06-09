@@ -7,13 +7,11 @@ import android.widget.ImageButton;
 
 import com.example.schedule.BasePage;
 import com.example.schedule.R;
-import com.example.schedule.models.Datable;
-import com.example.schedule.models.Favorite;
 import com.example.schedule.models.SearchListItem;
 import com.example.schedule.models.SearchType;
 import com.example.schedule.requests.GetLecturerClassesRequest;
 
-public class LecturersActivity extends BasePage implements Datable {
+public class LecturersActivity extends BasePage {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,19 +19,6 @@ public class LecturersActivity extends BasePage implements Datable {
         super.onCreate(savedInstanceState);
         setTitle("Расписание преподавателей");
         setActualIcon();
-    }
-
-
-
-    @Override
-    public void saveFavoriteGroup(boolean save) {
-        Favorite favorite = new Favorite();
-        favorite.label = super.searchListItem.label;
-        favorite.id = super.searchListItem.id;
-        favorite.description = super.searchListItem.description;
-        favorite.isDefault = save;
-        favorite.type = SearchType.LECTURER;
-        super.scheduleDB.setFavorite(favorite);
     }
 
     public void setActualIcon(){
