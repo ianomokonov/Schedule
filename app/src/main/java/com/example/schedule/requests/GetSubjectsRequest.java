@@ -7,7 +7,6 @@ import com.example.schedule.ApiService;
 import com.example.schedule.adapters.SubjectAdapter;
 import com.example.schedule.models.Subject;
 import com.example.schedule.models.SubjectDTO;
-import com.example.schedule.models.SubjectType;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -36,9 +35,9 @@ public class GetSubjectsRequest extends AsyncTask<String, Void, ArrayList<Subjec
             int dayOfWeek = -1;
             for(SubjectDTO subject:subjectsDTO){
                 if(term.length > 2 && dayOfWeek != subject.dayOfWeek){
-                    subjects.add(new Subject(subject.date, "", "", "", subject.dayOfWeekString, "", "", SubjectType.seminar));
+                    subjects.add(new Subject(subject.date, "", "", "", subject.dayOfWeekString, "", "", subject.kindOfWork));
                 }
-                subjects.add(new Subject(subject.discipline, subject.date, subject.beginLesson, subject.endLesson, subject.auditorium, subject.building, subject.lecturer, SubjectType.seminar));
+                subjects.add(new Subject(subject.discipline, subject.date, subject.beginLesson, subject.endLesson, subject.auditorium, subject.building, subject.lecturer, subject.kindOfWork));
                 dayOfWeek = subject.dayOfWeek;
             }
         } catch (Exception e) {
